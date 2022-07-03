@@ -40,6 +40,12 @@ const Button = styled.button`
   cursor: pointer;
   background-color: teal;
   color: white;
+  &:hover{
+    color: black;
+  };
+  &:focus{
+    color: white;
+  }
 `;
 
 const Newsletter = () => {
