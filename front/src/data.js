@@ -1,24 +1,24 @@
 export const sliderItems = [
   {
     id: 1,
-    img: "https://i.ibb.co/PZTx1wX/2.jpg",
+    img: "https://www.kindpng.com/picc/m/757-7578006_sun-dress-png-casual-summer-dress-png-transparent.png",
     title: "SUMMER SALE",
     desc: "DON'T COMPROISE ON STYLE! GET FLAT 30% OFF NEW ARRIVALS.",
-    bg: "f5fafd",
+    bg: "F7F7F7",
   },
   {
     id: 2,
-    img: "https://i.ibb.co/PZTx1wX/2.jpg",
+    img: "https://www.pngmart.com/files/1/Suit-PNG-Image.png",
     title: "WINTER COLLECTION",
     desc: "DON'T COMPROISE ON STYLE! GET FLAT 30% OFF NEW ARRIVALS.",
     bg: "fcf1ed",
   },
   {
     id: 3,
-    img: "https://i.ibb.co/ZXRJyqR/3.jpg",
+    img: "https://www.nicepng.com/png/detail/198-1987978_premium-hoodie-plain-white-hoodies-png.png",
     title: "POPULAR SALE",
     desc: "DON'T COMPROISE ON STYLE! GET FLAT 30% OFF NEW ARRIVALS.",
-    bg: "#ccfcb8",
+    bg: "F6F6F6",
   }
 ]
 
@@ -79,6 +79,6 @@ export const popularProducts = [
   },
   {
     id: 10,
-    img: "https://www.kindpng.com/picc/m/787-7873147_banner-transparent-library-pants-for-free-download-pocket.png",
+    img: "https://d3o2e4jr3mxnm3.cloudfront.net/Mens-Jake-Guitar-Vintage-Crusher-Tee_68382_1_lg.png",
   },
 ]
