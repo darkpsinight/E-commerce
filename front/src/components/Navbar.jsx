@@ -34,10 +34,11 @@ const SearchContainer = styled.div`
 `;
 
 const Input = styled.input`
+  padding-left: 10px;
   border: none;
   &:focus {
     outline-width: 0;
-}
+  }
 `;
 
 const Center = styled.div`
