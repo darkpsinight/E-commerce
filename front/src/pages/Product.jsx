@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Annoncement from "../components/Annoncement";
 import Newsletter from "../components/Newsletter";
+import { Add, Remove } from "@material-ui/icons";
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -33,16 +34,65 @@ const Price = styled.span`
   font-size: 40px;
 `;
 const FilterContainer = styled.div`
-  width: 50%;
+  width: 60%;
   margin: 30px 0px;
   display: flex;
   justify-content: space-between;
 `;
-const Filter = styled.div``;
-const FilterTitle = styled.span``;
-const FilterColor = styled.div``;
-const FilterSize = styled.select``;
+const Filter = styled.div`
+  display: flex;
+  align-items: center;
+`;
+const FilterTitle = styled.span`
+  margin-right: 10px;
+  font-size: 20px;
+  font-weight: 200;
+`;
+const FilterColor = styled.div`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: ${(props) => props.color};
+  margin: 0px 5px;
+  cursor: pointer;
+`;
+const FilterSize = styled.select`
+  margin-left: 10px;
+  padding: 5px;
+  cursor: pointer;
+`;
 const FilterSizeOption = styled.option``;
+const AddContainer = styled.div`
+  width: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+const AmountContainer = styled.div`
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+`;
+const Amount = styled.span`
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  border: 3px solid teal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 5px;
+`;
+const Button = styled.button`
+  padding: 15px;
+  border: 2px solid teal;
+  background-color: white;
+  cursor: pointer;
+  font-weight: 500;
+  &:hover {
+    background-color: #f8f4f4;
+  }
+`;
 
 const Product = () => {
   return (
@@ -65,7 +115,7 @@ const Product = () => {
             <Price>20 DT</Price>
             <FilterContainer>
               <Filter>
-                <FilterTitle>Color</FilterTitle>
+                <FilterTitle>Colors</FilterTitle>
                 <FilterColor color="black" />
                 <FilterColor color="darkblue" />
                 <FilterColor color="gray" />
@@ -81,6 +131,14 @@ const Product = () => {
                 </FilterSize>
               </Filter>
             </FilterContainer>
+            <AddContainer>
+              <AmountContainer>
+                <Remove style={{ cursor: "pointer" }} />
+                <Amount>1</Amount>
+                <Add style={{ cursor: "pointer" }} />
+              </AmountContainer>
+              <Button>ADD TO CART</Button>
+            </AddContainer>
           </InfoContainer>
         </Wrapper>
         <Newsletter />
