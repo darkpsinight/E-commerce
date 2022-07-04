@@ -44,7 +44,11 @@ const Button = styled.button`
   border: none;
   padding: 15px 20px;
   background-color: teal;
+  color: white;
   cursor: pointer;
+  &:focus{
+    color: black;
+  }
 `;
 const ReadMore = styled.a`
   font-weight: 800;
