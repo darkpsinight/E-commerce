@@ -32,7 +32,7 @@ const Input = styled.input`
   padding: 10px;
   border: 1px solid teal;
   &:focus {
-    border: 5px solid teal;
+    border: 3px solid teal;
   }
 `;
 const Agreement = styled.span`
