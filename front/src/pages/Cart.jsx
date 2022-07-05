@@ -90,14 +90,35 @@ const ProductPrice = styled.div`
   font-weight: 200;
 `;
 const DividerHorizontal = styled.hr`
-  border-top: 3px solid #bbb;
-`;
-const DividerVertical = styled.div`
-  border-left: 3px solid #bbb;
-  height: 600px;
+  background-color: #eee;
+  border: none;
+  height: 1px;
 `;
 const Summary = styled.div`
   flex: 1;
+  border: 0.5px solid lightgray;
+  border-radius: 10px;
+  padding: 20px;
+`;
+const SummaryTitle = styled.h1`
+  font-weight: 200;
+`;
+const SummaryItem = styled.div`
+  margin: 30px 0px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: ${(props) => props.type === "total" && "500"};
+  font-size: ${(props) => props.type === "total" && "24px"};
+`;
+const SummaryItemText = styled.span``;
+const SummaryItemPrice = styled.span``;
+const Button = styled.button`
+  width: 100%;
+  padding: 10px;
+  background-color: black;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
 `;
 
 const Cart = () => {
@@ -122,7 +143,7 @@ const Cart = () => {
                 <Image src="https://cdn.shopify.com/s/files/1/1104/4168/products/Men_s_Wool_Runners_-_Natural_Grey__Light_Grey_Sole__-_imageAngle_900x900.png" />
                 <Details>
                   <ProductName>
-                    <b>Product: </b>JESSIE THUNDER SHOES
+                    <b>PRODUCT: </b>JESSIE THUNDER SHOES
                   </ProductName>
                   <ProductId>
                     <b>ID: </b>61684254003
@@ -145,17 +166,17 @@ const Cart = () => {
             <DividerHorizontal />
             <Product>
               <ProductDetail>
-                <Image src="https://cdn.shopify.com/s/files/1/1104/4168/products/Men_s_Wool_Runners_-_Natural_Grey__Light_Grey_Sole__-_imageAngle_900x900.png" />
+                <Image src="https://www.philzcoffee.com/images/items/merchandise-grey-t-shirt.01.png" />
                 <Details>
                   <ProductName>
-                    <b>Product: </b>JESSIE THUNDER SHOES
+                    <b>PRODUCT: </b>HAKURA T-SHIRT
                   </ProductName>
                   <ProductId>
                     <b>ID: </b>61684254003
                   </ProductId>
-                  <ProductColor color="black" />
+                  <ProductColor color="gray" />
                   <ProductSize>
-                    <b>SIZE: </b>37.5
+                    <b>SIZE: </b>M
                   </ProductSize>
                 </Details>
               </ProductDetail>
@@ -165,38 +186,30 @@ const Cart = () => {
                   <ProductAmount>2 </ProductAmount>
                   <Remove style={{ cursor: "pointer" }} />
                 </ProductAmountContainer>
-                <ProductPrice>45 DT</ProductPrice>
-              </PriceDetail>
-            </Product>
-            <DividerHorizontal />
-            <Product>
-              <ProductDetail>
-                <Image src="https://cdn.shopify.com/s/files/1/1104/4168/products/Men_s_Wool_Runners_-_Natural_Grey__Light_Grey_Sole__-_imageAngle_900x900.png" />
-                <Details>
-                  <ProductName>
-                    <b>Product: </b>JESSIE THUNDER SHOES
-                  </ProductName>
-                  <ProductId>
-                    <b>ID: </b>61684254003
-                  </ProductId>
-                  <ProductColor color="black" />
-                  <ProductSize>
-                    <b>SIZE: </b>37.5
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add style={{ cursor: "pointer" }} />
-                  <ProductAmount>2 </ProductAmount>
-                  <Remove style={{ cursor: "pointer" }} />
-                </ProductAmountContainer>
-                <ProductPrice>45 DT</ProductPrice>
+                <ProductPrice>32 DT</ProductPrice>
               </PriceDetail>
             </Product>
           </Info>
-          <DividerVertical />
-          <Summary>SUMMARY</Summary>
+          <Summary>
+            <SummaryTitle>ORDER SUMMARY</SummaryTitle>
+            <SummaryItem>
+              <SummaryItemText>SubTotal</SummaryItemText>
+              <SummaryItemPrice>77 DT</SummaryItemPrice>
+            </SummaryItem>
+            <SummaryItem>
+              <SummaryItemText>Estimated Shipping</SummaryItemText>
+              <SummaryItemPrice>7 DT</SummaryItemPrice>
+            </SummaryItem>
+            <SummaryItem>
+              <SummaryItemText>Shipping Discount</SummaryItemText>
+              <SummaryItemPrice>-7 DT</SummaryItemPrice>
+            </SummaryItem>
+            <SummaryItem type="total">
+              <SummaryItemText>Total</SummaryItemText>
+              <SummaryItemPrice>77 DT</SummaryItemPrice>
+            </SummaryItem>
+            <Button>CHECKOUT NOW</Button>
+          </Summary>
         </Bottom>
       </Wrapper>
       <Footer />
