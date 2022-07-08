@@ -18,7 +18,7 @@ router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
     } catch (err) {
         res.status(500).json(err);
     }
-})
+});
 
 //DELETE
 router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
@@ -28,9 +28,9 @@ router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
     } catch (err) {
         res.status(500).json(err);
     }
-})
+});
 
-//GET USER (ONLY FOR ADMIN ROLE)
+//FIND USER BY ID (ONLY FOR ADMIN ROLE)
 router.get("/find/:id", verifyTokenAndAdmin, async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
@@ -39,9 +39,9 @@ router.get("/find/:id", verifyTokenAndAdmin, async (req, res) => {
     } catch (err) {
         res.status(500).json(err);
     }
-})
+});
 
-//GET ALL USERS + QUERY(ONLY FOR ADMIN ROLE)
+//GET ALL USERS (ONLY FOR ADMIN ROLE)
 router.get("/", verifyTokenAndAdmin, async (req, res) => {
     try {
         const users = await User.find();
@@ -49,6 +49,44 @@ router.get("/", verifyTokenAndAdmin, async (req, res) => {
     } catch (err) {
         res.status(500).json(err);
     }
-})
+});
+
+//GET USERS + QUERY -SORT & LIMIT (ONLY FOR ADMIN ROLE)
+router.get("/query", verifyTokenAndAdmin, async (req, res) => {
+    const query = req.query.new;
+    try {
+        const users = query
+            ? await User.find().sort({ _id: -1 }).limit(3)
+            : await User.find();
+        res.status(200).json({ users });
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+//GET USER STATS
+router.get("/stats", verifyTokenAndAdmin, async (req, res) => {
+    const date = new Date();
+    const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
+    try {
+        const data = await User.aggregate([
+            { $match: { createdAt: { $gte: lastYear } } },
+            {
+                $project: {
+                    month: { $month: "$createdAt" },
+                },
+            },
+            {
+                $group: {
+                    _id: "$month",
+                    total_users: { $sum: 1 },
+                },
+            },
+        ]);
+        res.status(200).json(data);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
 
 module.exports = router;
