@@ -25,7 +25,7 @@ router.post("/add", verifyTokenAndAdmin, async (req, res) => {
 });
 
 //UPDATE
-router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
+router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
     try {
         const updatedProduct = await Product.findByIdAndUpdate(req.params.id, {
             $set: req.body
@@ -37,7 +37,7 @@ router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
 });
 
 //DELETE
-router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
+router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
     try {
         await Product.findByIdAndDelete(req.params.id);
         res.status(200).json("Product has been deleted...");
@@ -47,7 +47,7 @@ router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
 });
 
 //FIND PRODUCT BY ID (ONLY FOR ADMIN ROLE)
-router.get("/find/:id", verifyTokenAndAdmin, async (req, res) => {
+router.get("/find/:id", async (req, res) => {
     try {
         const product = await Product.findById(req.params.id);
         res.status(200).json({ product });
@@ -57,7 +57,7 @@ router.get("/find/:id", verifyTokenAndAdmin, async (req, res) => {
 });
 
 //GET ALL PRODUCTS (ONLY FOR ADMIN ROLE)
-router.get("/", verifyTokenAndAdmin, async (req, res) => {
+router.get("/", async (req, res) => {
     try {
         const products = await Product.find();
         res.status(200).json({ products });
@@ -66,13 +66,23 @@ router.get("/", verifyTokenAndAdmin, async (req, res) => {
     }
 });
 
-//GET PRODUCTS + QUERY -SORT & LIMIT (ONLY FOR ADMIN ROLE)
+//GET PRODUCTS + QUERY NEW (SORT & LIMIT)+ QUERY CATEGORY (ONLY FOR ADMIN ROLE)
 router.get("/query", verifyTokenAndAdmin, async (req, res) => {
-    const query = req.query.new;
+    const qNew = req.query.new;
+    const qCategory = req.query.category;
     try {
-        const products = query
-            ? await Product.find().sort({ _id: -1 }).limit(3)
-            : await Product.find();
+        let products;
+        if (qNew) {
+            products = await Product.find().sort({ createdAt: -1 }).limit(5);
+        } else if (qCategory) {
+            products = await Product.find({
+                categories: {
+                    $in: [qCategory],
+                }
+            });
+        } else {
+            products = await Product.find();
+        }
         res.status(200).json({ products });
     } catch (err) {
         res.status(500).json(err);
