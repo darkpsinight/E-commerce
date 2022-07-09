@@ -83,13 +83,13 @@ router.get("/query", verifyTokenAndAdmin, async (req, res) => {
         } else {
             products = await Product.find();
         }
-        res.status(200).json({ products });
+        res.status(200).json(products);
     } catch (err) {
         res.status(500).json(err);
     }
 });
 
-//GET PRODUCT STATS
+/* //GET PRODUCT STATS
 router.get("/stats", verifyTokenAndAdmin, async (req, res) => {
     const date = new Date();
     const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
@@ -112,6 +112,6 @@ router.get("/stats", verifyTokenAndAdmin, async (req, res) => {
     } catch (err) {
         res.status(500).json(err);
     }
-});
+}); */
 
 module.exports = router;
