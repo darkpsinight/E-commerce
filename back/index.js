@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose")
-const dotenv = require("dotenv")
+require('dotenv').config()
 const userRoute = require("./routes/user")
 const productRoute = require("./routes/product")
 const cartRoute = require("./routes/cart")
@@ -10,7 +10,6 @@ const authRoute = require("./routes/auth")
 const stripeRoute = require("./routes/stripe")
 const cors = require("cors")
 
-dotenv.config();
 mongoose
     .connect(process.env.MONGO_URL)
     .then(() => console.log("DB connection Successfull"))
