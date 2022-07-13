@@ -43,7 +43,7 @@ router.post("/login", async (req, res) => {
                 isAdmin: user.isAdmin
             },
             process.env.JWT_SEC,
-            { expiresIn: "7d" }
+            { expiresIn: "90d" }
         );
 
         //_doc houwa el fichier illi MongoDB y'save fih data, nzidouh béch yrakka7 affichage, w hakka ywalli password mayit'la3ch f Postman

@@ -5,6 +5,9 @@ import Annoncement from "../components/Annoncement";
 import Newsletter from "../components/Newsletter";
 import { Add, Remove } from "@material-ui/icons";
 import { mobile } from "../responsive";
+import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { publicRequest } from "../requestMethods";
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -101,6 +104,21 @@ const Button = styled.button`
 `;
 
 const Product = () => {
+  const location = useLocation();
+  const id = location.pathname.split("/")[2];
+  const [product, setProduct] = useState({});
+
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        const res = await publicRequest.get("/products/find/" + id);
+        setProduct(res.data);
+        console.log(res.data)
+      } catch (err) {}
+    };
+    getProduct();
+  }, [id]);
+
   return (
     <div>
       <Container>
@@ -108,7 +126,7 @@ const Product = () => {
         <Annoncement />
         <Wrapper>
           <ImgContainer>
-            <Image src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1632473750-screen-shot-2021-09-24-at-09-53-42-1632473699.png" />
+            <Image src={product.img} />
           </ImgContainer>
           <InfoContainer>
             <Title>Autumn Dress</Title>

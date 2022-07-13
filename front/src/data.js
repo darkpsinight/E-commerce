@@ -27,7 +27,7 @@ export const categories = [
     id: 1,
     img: "https://images.pexels.com/photos/5886041/pexels-photo-5886041.jpeg",
     title: "SHIRT STYLE!",
-    cat: "women"
+    cat: "tshirt"
   },
   {
     id: 2,
@@ -39,7 +39,7 @@ export const categories = [
     id: 3,
     img: "https://images.pexels.com/photos/5480696/pexels-photo-5480696.jpeg",
     title: "LIGHT JACKETS",
-    cat: "jeans"
+    cat: "jacket"
   }
 ]
 
