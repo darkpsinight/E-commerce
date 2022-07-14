@@ -113,7 +113,7 @@ const Product = () => {
       try {
         const res = await publicRequest.get("/products/find/" + id);
         setProduct(res.data);
-        console.log(res.data)
+        console.log(res.data);
       } catch (err) {}
     };
     getProduct();
@@ -126,7 +126,7 @@ const Product = () => {
         <Annoncement />
         <Wrapper>
           <ImgContainer>
-            <Image src={product.img} />
+            <Image src={product?.product?.img} />
           </ImgContainer>
           <InfoContainer>
             <Title>Autumn Dress</Title>
