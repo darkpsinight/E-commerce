@@ -63,11 +63,14 @@ const FilterColor = styled.div`
   background-color: ${(props) => props.color};
   margin: 0px 5px;
   cursor: pointer;
+  border: 1px solid black;
 `;
 const FilterSize = styled.select`
   margin-left: 10px;
   padding: 5px;
   cursor: pointer;
+  outline: 0px;
+  font-size: inherit;
 `;
 const FilterSizeOption = styled.option``;
 const AddContainer = styled.div`
@@ -107,6 +110,9 @@ const Product = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
   const [product, setProduct] = useState({});
+  const [quantity, setQuantity] = useState(1);
+  const [color, setColor] = useState("");
+  const [size, setSize] = useState("");
 
   useEffect(() => {
     const getProduct = async () => {
@@ -119,6 +125,19 @@ const Product = () => {
     getProduct();
   }, [id]);
 
+  const handleQuantity = (type) => {
+    if (type === "dec") {
+      quantity > 1 && setQuantity(quantity - 1);
+    } else {
+      setQuantity(quantity + 1);
+    }
+    console.log(quantity);
+  };
+
+  const handleClick = () => {
+    //update cart
+  };
+
   return (
     <div>
       <Container>
@@ -129,39 +148,38 @@ const Product = () => {
             <Image src={product?.product?.img} />
           </ImgContainer>
           <InfoContainer>
-            <Title>Autumn Dress</Title>
-            <Desc>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque
-              impedit repellendus tempore cumque delectus illum labore. Soluta,
-              repellat. Ipsa eligendi ipsam est perferendis voluptas sint, sed
-              id dignissimos corrupti assumenda?
-            </Desc>
-            <Price>60 DT</Price>
+            <Title>{product?.product?.title}</Title>
+            <Desc>{product?.product?.desc}</Desc>
+            <Price>{product?.product?.price} DT</Price>
             <FilterContainer>
               <Filter>
                 <FilterTitle>Colors</FilterTitle>
-                <FilterColor color="black" />
-                <FilterColor color="darkblue" />
-                <FilterColor color="gray" />
+                {product?.product?.color.map((c) => (
+                  <FilterColor color={c} key={c} onClick={() => setColor(c)} />
+                ))}
               </Filter>
               <Filter>
                 <FilterTitle>Size</FilterTitle>
-                <FilterSize>
-                  <FilterSizeOption>XS</FilterSizeOption>
-                  <FilterSizeOption>S</FilterSizeOption>
-                  <FilterSizeOption>M</FilterSizeOption>
-                  <FilterSizeOption>L</FilterSizeOption>
-                  <FilterSizeOption>XL</FilterSizeOption>
+                <FilterSize onChange={(e) => setSize(e.target.value)}>
+                  {product?.product?.size.map((s) => (
+                    <FilterSizeOption key={s}>{s} </FilterSizeOption>
+                  ))}
                 </FilterSize>
               </Filter>
             </FilterContainer>
             <AddContainer>
               <AmountContainer>
-                <Remove style={{ cursor: "pointer" }} />
-                <Amount>1</Amount>
-                <Add style={{ cursor: "pointer" }} />
+                <Remove
+                  style={{ cursor: "pointer" }}
+                  onClick={() => handleQuantity("dec")}
+                />
+                <Amount>{quantity}</Amount>
+                <Add
+                  style={{ cursor: "pointer" }}
+                  onClick={() => handleQuantity("inc")}
+                />
               </AmountContainer>
-              <Button>ADD TO CART</Button>
+              <Button onClick={handleClick}>ADD TO CART</Button>
             </AddContainer>
           </InfoContainer>
         </Wrapper>
