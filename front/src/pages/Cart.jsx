@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import Annoncement from "../components/Annoncement";
 import { Add, Remove } from "@material-ui/icons";
 import { mobile } from "../responsive";
+import { useSelector } from "react-redux";
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -69,10 +70,11 @@ const Details = styled.div`
 const ProductName = styled.span``;
 const ProductId = styled.span``;
 const ProductColor = styled.div`
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   background-color: ${(props) => props.color};
+  border: 1px solid black;
 `;
 const ProductSize = styled.span``;
 const PriceDetail = styled.div`
@@ -130,6 +132,8 @@ const Button = styled.button`
 `;
 
 const Cart = () => {
+  const cart = useSelector((state) => state.cart);
+
   return (
     <Container>
       <Navbar />
@@ -146,63 +150,45 @@ const Cart = () => {
         </Top>
         <Bottom>
           <Info>
-            <Product>
-              <ProductDetail>
-                <Image src="https://cdn.shopify.com/s/files/1/1104/4168/products/Men_s_Wool_Runners_-_Natural_Grey__Light_Grey_Sole__-_imageAngle_900x900.png" />
-                <Details>
-                  <ProductName>
-                    <b>PRODUCT: </b>JESSIE THUNDER SHOES
-                  </ProductName>
-                  <ProductId>
-                    <b>ID: </b>61684254003
-                  </ProductId>
-                  <ProductColor color="black" />
-                  <ProductSize>
-                    <b>SIZE: </b>37.5
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add style={{ cursor: "pointer" }} />
-                  <ProductAmount>2 </ProductAmount>
-                  <Remove style={{ cursor: "pointer" }} />
-                </ProductAmountContainer>
-                <ProductPrice>45 DT</ProductPrice>
-              </PriceDetail>
-            </Product>
+            {cart.products.map((product) => (
+              <Product>
+                <ProductDetail>
+                  <Image src={product.product.img} />
+                  <Details>
+                    <ProductName>
+                      <b>PRODUCT: </b>
+                      {product.product.title}
+                    </ProductName>
+                    <ProductId>
+                      <b>ID: </b>
+                      {product.product._id}
+                    </ProductId>
+                    <ProductColor color={product.color} />
+                    <ProductSize>
+                      <b>SIZE: </b>
+                      {product.size}
+                    </ProductSize>
+                  </Details>
+                </ProductDetail>
+                <PriceDetail>
+                  <ProductAmountContainer>
+                    <Add style={{ cursor: "pointer" }} />
+                    <ProductAmount>{product.quantity}</ProductAmount>
+                    <Remove style={{ cursor: "pointer" }} />
+                  </ProductAmountContainer>
+                  <ProductPrice>
+                    {product.product.price * product.quantity} DT
+                  </ProductPrice>
+                </PriceDetail>
+              </Product>
+            ))}
             <DividerHorizontal />
-            <Product>
-              <ProductDetail>
-                <Image src="https://www.philzcoffee.com/images/items/merchandise-grey-t-shirt.01.png" />
-                <Details>
-                  <ProductName>
-                    <b>PRODUCT: </b>HAKURA T-SHIRT
-                  </ProductName>
-                  <ProductId>
-                    <b>ID: </b>61684254003
-                  </ProductId>
-                  <ProductColor color="gray" />
-                  <ProductSize>
-                    <b>SIZE: </b>M
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add style={{ cursor: "pointer" }} />
-                  <ProductAmount>2 </ProductAmount>
-                  <Remove style={{ cursor: "pointer" }} />
-                </ProductAmountContainer>
-                <ProductPrice>32 DT</ProductPrice>
-              </PriceDetail>
-            </Product>
           </Info>
           <Summary>
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>SubTotal</SummaryItemText>
-              <SummaryItemPrice>77 DT</SummaryItemPrice>
+              <SummaryItemPrice>{cart.total} DT</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Estimated Shipping</SummaryItemText>
@@ -214,7 +200,7 @@ const Cart = () => {
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>77 DT</SummaryItemPrice>
+              <SummaryItemPrice>{cart.total} DT</SummaryItemPrice>
             </SummaryItem>
             <Button>CHECKOUT NOW</Button>
           </Summary>
