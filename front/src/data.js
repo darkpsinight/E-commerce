@@ -33,7 +33,7 @@ export const categories = [
     id: 2,
     img: "https://images.pexels.com/photos/2983464/pexels-photo-2983464.jpeg",
     title: "LOUNGEWEAR LOVE",
-    cat: "coat"
+    cat: "women"
   },
   {
     id: 3,
