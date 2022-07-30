@@ -1,0 +1,78 @@
+.single {
+  display: flex;
+  width: 100%;
+  .singleContainer {
+    flex: 6;
+    .top {
+      padding: 20px;
+      display: flex;
+      gap: 20px;
+      .left {
+        position: relative;
+        flex: 1;
+        padding: 20px;
+        -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.47);
+        box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.45);
+        .editButton {
+          position: absolute;
+          top: 0;
+          right: 0;
+          padding: 5px;
+          font-size: 12px;
+          color: #7451f8;
+          background-color: #7551f818;
+          border-radius: 10px 0px;
+          cursor: pointer;
+        }
+        .item {
+          display: flex;
+          gap: 20px;
+          .details {
+            color: #a4a1e1;
+            cursor: pointer;
+            .itemTitle {
+              color: gray;
+            }
+            .detailItem {
+              margin-bottom: 10px;
+              font-size: 14px;
+              .icon {
+                font-size: 13px;
+                margin-right: 5px;
+              }
+              .itemKey {
+                font-weight: 800;
+                color: #a4a1e1;
+                margin-right: 10px;
+              }
+              .itemValue {
+                font-weight: 300;
+                color: rgb(146, 145, 145);
+              }
+            }
+          }
+          .itemImg {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+        }
+      }
+      .right {
+        flex: 2;
+      }
+    }
+    .bottom {
+      -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.47);
+      box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.45);
+      padding: 20px;
+      margin: 10px 20px;
+    }
+    .title {
+      font-size: 25px;
+      color: lightgray;
+      margin-bottom: 20px;
+    }
+  }
+}

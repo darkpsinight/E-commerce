@@ -1,0 +1,68 @@
+.login {
+  font-family: "Ubuntu", sans-serif;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: linear-gradient(160deg, #2d3a4b 0%, #56575a 100%);
+  h1 {
+    color: #fff;
+    font-size: 45px;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  input {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-bottom: 1px solid teal;
+    &:focus {
+      outline: none;
+    }
+  }
+  button {
+    padding: 10px;
+    cursor: pointer;
+    color: #f1c40f;
+    font-size: 1.2rem;
+    text-align: center;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid #e74c3c;
+    border-radius: 0.6em;
+    color: #e74c3c;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-self: center;
+    -ms-flex-item-align: center;
+    align-self: center;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1;
+    margin: 20px;
+    padding: 1.2em 2.8em;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    border-color: #3498db;
+    color: #fff;
+    box-shadow: 0 0 40px 40px #3498db inset, 0 0 0 0 #3498db;
+    -webkit-transition: all 150ms ease-in-out;
+    transition: all 150ms ease-in-out;
+    &:hover {
+      color: #fff;
+      outline: 0;
+      box-shadow: 0 0 10px 0 #3498db inset, 0 0 10px 4px #3498db;
+      background-color: teal;
+    }
+  }
+}
