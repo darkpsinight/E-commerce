@@ -1,5 +1,5 @@
 {
-  "name": "lamaadmin",
+  "name": "admindashboard",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -15,6 +15,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "recharts": "^2.0.9",
+    "timeago.js": "^4.0.2",
     "web-vitals": "^1.0.1"
   },
   "scripts": {

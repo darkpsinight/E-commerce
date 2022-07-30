@@ -68,6 +68,7 @@ router.get("/query", verifyTokenAndAdmin, async (req, res) => {
 router.get("/stats", verifyTokenAndAdmin, async (req, res) => {
     const date = new Date();
     const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
+
     try {
         const data = await User.aggregate([
             { $match: { createdAt: { $gte: lastYear } } },
@@ -79,11 +80,11 @@ router.get("/stats", verifyTokenAndAdmin, async (req, res) => {
             {
                 $group: {
                     _id: "$month",
-                    total_users: { $sum: 1 },
+                    total: { $sum: 1 },
                 },
             },
         ]);
-        res.status(200).json(data);
+        res.status(200).json(data)
     } catch (err) {
         res.status(500).json(err);
     }
