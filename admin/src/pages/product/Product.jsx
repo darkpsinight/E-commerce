@@ -1,16 +1,58 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 import "./product.css";
 import Chart from "../../components/chart/Chart";
-import { productData } from "../../dummyData";
 import { Publish } from "@material-ui/icons";
 import { useSelector } from "react-redux";
+import { useEffect, useMemo, useState } from "react";
+import { userRequest } from "../../requestMethods";
 
 export default function Product() {
+  let history = useHistory();
   const location = useLocation();
   const productId = location.pathname.split("/")[2];
+  const [pStats, setPStats] = useState([]);
+
   const product = useSelector((state) =>
     state.product.products.find((product) => product._id === productId)
   );
+
+  const MONTHS = useMemo(
+    () => [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Agu",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
+    []
+  );
+
+  useEffect(() => {
+    const getStats = async () => {
+      try {
+        const res = await userRequest.get("orders/income?pid=" /*+productId */);
+        const list = res.data.sort((a, b) => {
+          return a._id - b._id;
+        });
+        list.map((item) =>
+          setPStats((prev) => [
+            ...prev,
+            { name: MONTHS[item._id - 1], Sales: item.total },
+          ])
+        );
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getStats();
+  }, [productId, MONTHS]);
 
   return (
     <div className="product">
@@ -22,7 +64,7 @@ export default function Product() {
       </div>
       <div className="productTop">
         <div className="productTopLeft">
-          <Chart data={productData} dataKey="Sales" title="Sales Performance" />
+          <Chart data={pStats} dataKey="Sales" title="Sales Performance" />
         </div>
         <div className="productTopRight">
           <div className="productInfoTop">
@@ -72,7 +114,7 @@ export default function Product() {
                 alt="Product to update"
                 className="productUploadImg"
               />
-              <label for="file">
+              <label htmlFor="file">
                 <Publish className="fileUpload" />
               </label>
               <input type="file" id="file" style={{ display: "none" }} />
@@ -80,6 +122,11 @@ export default function Product() {
             <button className="productButton">Update</button>
           </div>
         </form>
+      </div>
+      <div className="backButtonContainer">
+        <button className="productAddButton" onClick={() => history.goBack()}>
+        ⬅ Back
+        </button>
       </div>
     </div>
   );
