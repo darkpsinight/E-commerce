@@ -10,8 +10,20 @@ export default function FeaturedInfo() {
     const getIncome = async () => {
       try {
         const res = await userRequest.get("orders/income");
-        setIncome(res.data);
-        setPerc((res.data[1].total * 100) / res.data[0].total - 100);
+        //sort res.data
+        const sort = res.data.sort((x, y) => x._id - y._id);
+        //calculate difference between last 2 months
+        const difference =
+          sort[sort.length - 1].total - sort[sort.length - 2].total;
+        setIncome(difference);
+        //calculate percentage
+        /* setPerc((res.data[res.data.length - 1].total * 100) / res.data[res.data.length - 2].total); */
+        setPerc(
+          ((res.data[res.data.length - 1].total -
+            res.data[res.data.length - 2].total) /
+            res.data[res.data.length - 2].total) *
+            100
+        );
       } catch {}
     };
     getIncome();
@@ -22,7 +34,7 @@ export default function FeaturedInfo() {
       <div className="featuredItem">
         <span className="featuredTitle">Revanue</span>
         <div className="featuredMoneyContainer">
-          <span className="featuredMoney">{income[1]?.total} DT</span>
+          <span className="featuredMoney">{income} DT</span>
           <span className="featuredMoneyRate">
             {Math.floor(perc)}%{" "}
             {perc < 0 ? (

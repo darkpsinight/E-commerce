@@ -4,7 +4,7 @@ import { Search, ShoppingCartOutlined } from "@material-ui/icons";
 import { Badge } from "@material-ui/core";
 import { mobile } from "../responsive";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const Container = styled.div`
   height: 60px;
@@ -72,10 +72,26 @@ const MenuItem = styled.div`
   cursor: pointer;
   margin-left: 25px;
   ${mobile({ fontSize: "12px", marginLeft: "10px" })};
+  &:hover {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-2px);
+    box-shadow: 5px 6px 11px 1px rgba(0, 0, 0, 0.16);
+    -webkit-box-shadow: 5px 6px 11px 1px rgba(0, 0, 0, 0.16);
+    -moz-box-shadow: 5px 6px 11px 1px rgba(0, 0, 0, 0.16);
+  }
 `;
 
 const Navbar = () => {
   const quantity = useSelector((state) => state.cart.quantity);
+  const history = useHistory();
+
+  const handleClickRegister = () => {
+    history.push("/register");
+  };
+  const handleClickLogin = () => {
+    history.push("/login");
+  };
 
   return (
     <Container>
@@ -91,8 +107,18 @@ const Navbar = () => {
           <Logo>ShopTn</Logo>
         </Center>
         <Right>
-          <MenuItem>Register</MenuItem>
-          <MenuItem>SIGN IN</MenuItem>
+          <MenuItem
+            style={{ border: "2px solid teal", padding: "6px" }}
+            onClick={handleClickRegister}
+          >
+            Register
+          </MenuItem>
+          <MenuItem
+            style={{ border: "2px solid teal", padding: "6px" }}
+            onClick={handleClickLogin}
+          >
+            SIGN IN
+          </MenuItem>
           <Link to="/cart">
             <MenuItem>
               <Badge
