@@ -98,8 +98,9 @@
   border-bottom: 1px solid gray;
 }
 input:focus {
-  background-color: rgb(193, 228, 240);
+  background-color: rgb(233, 233, 233);
   outline: none;
+  border: 2px solid rgb(142, 142, 142);
 }
 
 .productFormLeft > select {
