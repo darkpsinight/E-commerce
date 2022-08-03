@@ -30,7 +30,7 @@ export default function NewProduct() {
           <input
             type="file"
             id="file"
-            onChange={(e) => setFile(e.target.files)[0]}
+            onChange={(e) => setFile(e.target.files[0])}
           />
         </div>
         <div className="addProductItem">
